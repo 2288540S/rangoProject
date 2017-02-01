@@ -1,3 +1,4 @@
+
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'rangoProject.settings')
@@ -10,8 +11,8 @@ def populate():
     # First, we will create lists of dictionaries containing the pages
     # we want to add into each category.
     # Then we will create a dictionary of dictionaries for our categories.
-    # This might seem a little bit confusing, but it allows us to iterate
-    # through each data structure, and add the data to our models.
+    #  This might seem a little bit confusing, but it allows us to iterate
+    #  through each data structure, and add the data to our models.
 
     python_pages = [
         {"title": "Official Python Tutorial",
@@ -44,11 +45,11 @@ def populate():
     ]
 
     cats = {"Python": {"pages": python_pages,
-                       "views":128 ,"likes":64},
+                       "views": 128, "likes": 64},
             "Django": {"pages": django_pages,
-                       "views":64 ,"likes":32},
+                       "views": 64, "likes": 32},
             "Other Frameworks": {"pages": other_pages,
-                       "views":32 ,"likes":16}
+                       "views": 32, "likes": 16}
             }
     # If you want to add more catergories or pages,
     # add them to the dictionaries above.
@@ -61,8 +62,8 @@ def populate():
     # http://docs.quantifiedcode.com/python-anti-patterns/readability/
     # for more information about how to iterate over a dictionary properly.
     # CHECK THIS IF THERE ARE ISSUES <<<<<<
-    for cat, cat_data in cats.iteritems():
-        c = add_cat(cat)
+    for cat, cat_data in cats.items():
+        c = add_cat(cat, cat_data["views"], cat_data["likes"])
         for p in cat_data["pages"]:
             add_page(c, p["title"], p["url"])
 
