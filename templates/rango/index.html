@@ -13,12 +13,9 @@
 			hey there partner!
 		</div>
 		<pre></pre>
-		<big>
-			<u>
+		<h2>
 			Most Liked Categories
-			</u>
-		</big>
-
+		</h2>
 		<div>
 		{% if categories %}
 		<ul>
@@ -34,13 +31,9 @@
 		{% endif %}
 		</div>
 
-
-		<big>
-			<u>
+			<h2>
 			Most Viewed Pages
-			</u>
-		</big>
-
+			</h2>
 		<div>
 		{% if pages %}
 		<ul>
@@ -59,6 +52,7 @@
 
 		<div>
 			<a href='/rango/about/'>About</a><br />
+			<a href="/rango/add_category/">Add a New Category</a><br />
 			<img src="{% static "images/rango.jpg" %}" alt="Picture of Rango" />
 		</div> 
 	</body>
