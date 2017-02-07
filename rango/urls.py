@@ -1,5 +1,7 @@
-
+from django.conf.urls.static import static
 from django.conf.urls import url
+from django.conf import settings
+
 from rango import views
 
 urlpatterns = [
@@ -18,4 +20,4 @@ urlpatterns = [
     url(r'restricted/$', views.restricted, name='restricted'),
     url(r'logout/$', views.user_logout, name='logout'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
