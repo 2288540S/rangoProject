@@ -7,12 +7,14 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import logout
+from datetime import datetime
 
 # Imports the Page amd Category model
 from rango.models import Page, Category
 
 
 def index(request):
+    request.session.set_test_cookie()
     # Query the database for a list of ALL categories currently stored.
     # Order the categories by no. likes in descending order.
     # Retrieve the top 5 only - or all if less than 5.
@@ -24,11 +26,18 @@ def index(request):
 
     context_dict = {'categories': category_list, 'pages': page_list}
 
+    response = render(request, 'rango/index.html', context_dict)
+
+    visitor_cookie_handler(request, response)
+
     # Render the response and send it back!
-    return render(request, 'rango/index.html', context=context_dict)
+    return response
 
 
 def about(request):
+    if request.session.test_cookie_worked():
+        print("TEST COOKIE WORKED!")
+        request.session.delete_test_cookie()
     return render(request, 'rango/about.html')
 
 
@@ -186,3 +195,20 @@ def restricted(request):
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+
+def visitor_cookie_handler(request, response):
+    visits = int(request.COOKIES.get('visits', '1'))
+
+    last_visit_cookie = request.COOKIES.get('last_visit', str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7],
+    '%Y-%m-%d %H-%M-%S')
+
+    if (datetime.now() - last_visit_time).days > 0:
+        visits = visits+1
+        response.set_cookie('last_visit', str(datetime.now()))
+    else:
+        visits = 1
+        response.set_cookie('last_visit', last_visit_cookie)
+
+    response.set.cookie('visits', visits)
