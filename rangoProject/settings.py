@@ -18,8 +18,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 print(STATIC_DIR)
 
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-print(TEMPLATES_DIR)
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+print(TEMPLATE_DIR)
 
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'rangoProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR,],
+        'DIRS': [TEMPLATE_DIR,],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
